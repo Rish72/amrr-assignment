@@ -14,11 +14,14 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import axios from "axios";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 const AddProduct = () => {
   const [title, setTitle] = useState("");
   const [type, setType] = useState("Shirt");
   const [description, setDescription] = useState("");
+  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -29,25 +32,29 @@ const AddProduct = () => {
       type,
       description,
       coverImage: "/images/img1.jpg",
-      additionalImages: ["/images/img2.jpg","/images/img3.jpg","/images/img4.jpg"],
+      additionalImages: [
+        "/images/img2.jpg",
+        "/images/img3.jpg",
+        "/images/img4.jpg",
+      ],
     };
 
     try {
       await axios.post("/api/add-items", newProduct);
-      alert("Product added successfully!");
+      toast.success("Product added successfully!");
 
       setTitle("");
       setType("Shirt");
       setDescription("");
-
+      router.push("/view-products");
     } catch (error) {
       console.error(" Error adding product:", error);
-      alert("Failed to add product.");
+      toast.error("Failed to add product.");
     }
   };
 
   return (
-    <div className="h-screen flex justify-center items-center">
+    <div className="h-screen flex justify-center items-center bg-black">
       <Card className="w-full max-w-sm">
         <CardHeader>
           <CardTitle>Add your Product</CardTitle>

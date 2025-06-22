@@ -10,7 +10,7 @@ type Props = {
 const Cards = ({ item }: Props) => {
   return (
     <Card
-      className="w-full backdrop-blur-lg sm:w-[calc(50%-theme(gap.6)/2)] lg:w-[calc(33.33%-theme(gap.6)*2/3)] xl:w-[calc(25%-theme(gap.6)*3/4)]"
+      className="w-full text-white bg-black sm:w-[calc(50%-theme(gap.6)/2)] lg:w-[calc(33.33%-theme(gap.6)*2/3)] xl:w-[calc(25%-theme(gap.6)*3/4)]"
     >
       <CardHeader>
         <Image
