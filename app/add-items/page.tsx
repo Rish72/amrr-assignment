@@ -1,4 +1,5 @@
 "use client";
+import { CldUploadWidget } from "next-cloudinary";
 
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -15,12 +16,18 @@ import { Label } from "@/components/ui/label";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
-
 const AddProduct = () => {
   const [title, setTitle] = useState("");
   const [type, setType] = useState("Shirt");
   const [description, setDescription] = useState("");
+  const [coverImage, setCoverImage] = useState("");
+  const [additionalImages, setAdditionalImages] = useState<string[]>([]);
   const router = useRouter();
+
+  type CloudinaryUploadWidgetInfo = {
+    secure_url: string;
+    url: string;
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -30,21 +37,20 @@ const AddProduct = () => {
       name: title,
       type,
       description,
-      coverImage: "/images/img1.jpg",
-      additionalImages: [
-        "/images/img2.jpg",
-        "/images/img3.jpg",
-        "/images/img4.jpg",
-      ],
+      coverImage,
+      additionalImages,
     };
 
     try {
+      console.log("new product coverImage ", newProduct.additionalImages);
+
       await axios.post("/api/add-items", newProduct);
       toast.success("Product added successfully!");
 
       setTitle("");
       setType("Shirt");
       setDescription("");
+      setCoverImage("");
       router.push("/view-products");
     } catch (error) {
       console.error(" Error adding product:", error);
@@ -53,7 +59,7 @@ const AddProduct = () => {
   };
 
   return (
-    <div className="h-screen flex justify-center items-center bg-black">
+    <div className="h-[100vh] flex justify-center items-center">
       <Card className="w-full max-w-sm">
         <CardHeader>
           <CardTitle>Add your Product</CardTitle>
@@ -76,7 +82,6 @@ const AddProduct = () => {
                   required
                 />
               </div>
-
               {/* Type */}
               <div className="grid gap-2">
                 <Label htmlFor="type">Type</Label>
@@ -92,7 +97,34 @@ const AddProduct = () => {
                   <option value="Sports Gear">Sports Gear</option>
                 </select>
               </div>
+              {/*  COver image */}
+              <div className="grid gap-2">
+                <Label htmlFor="coverImage">Cover Image</Label>
+                <CldUploadWidget
+                  uploadPreset="assignment-uploads"
+                  onSuccess={({ info }) => {
+                    const uploadedImageUrl =
+                      (info as CloudinaryUploadWidgetInfo).secure_url ||
+                      (info as CloudinaryUploadWidgetInfo).url;
 
+                    console.log("infor", uploadedImageUrl);
+
+                    setCoverImage(uploadedImageUrl);
+                  }}
+                  options={{ multiple: false }}
+                >
+                  {({ open }) => {
+                    return (
+                      <button
+                        className="border border-gray-200 rounded-md"
+                        onClick={() => open()}
+                      >
+                        Upload Images
+                      </button>
+                    );
+                  }}
+                </CldUploadWidget>
+              </div>
               {/* Description */}
               <div className="grid gap-2">
                 <Label htmlFor="description">Description</Label>
@@ -105,7 +137,47 @@ const AddProduct = () => {
                   required
                 />
               </div>
+              <div className="grid gap-2">
+                <Label htmlFor="additionalImages">
+                  Upload additional Images
+                </Label>
+                <CldUploadWidget
+                  uploadPreset="assignment-uploads"
+                  onSuccess={({ info }) => {
+                    const uploadedImageUrl =
+                      (info as CloudinaryUploadWidgetInfo).secure_url ||
+                      (info as CloudinaryUploadWidgetInfo).url;
 
+                    if (!uploadedImageUrl) return;
+
+                    setAdditionalImages((prevImages) => {
+                      // Avoid duplicates
+                      if (prevImages.includes(uploadedImageUrl))
+                        return prevImages;
+
+                      // Limit to 4 images
+                      if (prevImages.length >= 4) {
+                        toast.error("Maximum of 4 additional images allowed.");
+                        return prevImages;
+                      }
+
+                      return [...prevImages, uploadedImageUrl];
+                    });
+                  }}
+                  options={{ multiple: true }}
+                >
+                  {({ open }) => {
+                    return (
+                      <button
+                        className="border border-gray-200 rounded-md"
+                        onClick={() => open()}
+                      >
+                        Upload Images
+                      </button>
+                    );
+                  }}
+                </CldUploadWidget>
+              </div>
               {/* TODO: Image upload UI (not now) */}
             </div>
 

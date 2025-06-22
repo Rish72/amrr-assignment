@@ -1,7 +1,6 @@
-"use client";
 import { Card, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Item } from "@/db/data";
-import Image from "next/image";
+// import Image from "next/image";
 import {
   Drawer,
   DrawerClose,
@@ -13,6 +12,7 @@ import {
   DrawerTrigger,
 } from "./ui/drawer";
 import { Button } from "./ui/button";
+import Image from "next/image";
 
 type Props = {
   item: Item;
@@ -23,18 +23,14 @@ const Cards = ({ item }: Props) => {
   return (
     <Card className="w-full text-white bg-black sm:w-[calc(50%-theme(gap.6)/2)] lg:w-[calc(33.33%-theme(gap.6)*2/3)] xl:w-[calc(25%-theme(gap.6)*3/4)]">
       <CardHeader>
-        <Image
-          src={item.coverImage}
-          alt={item.name}
-          width={300}
-          height={200}
-          className="rounded-md object-cover"
-        />
+        <Image src={item.coverImage} alt={item.name} width={500} height={200} />
         <CardTitle>{item.name}</CardTitle>
       </CardHeader>
       <CardFooter>
         <Drawer>
-          <DrawerTrigger>Description</DrawerTrigger>
+          <DrawerTrigger className="cursor-pointer border-1 p-2 rounded">
+            Description
+          </DrawerTrigger>
           <DrawerContent>
             <div className="flex-grow p-4 overflow-y-auto items-center">
               <Image
@@ -42,19 +38,18 @@ const Cards = ({ item }: Props) => {
                 alt={item.name}
                 width={500}
                 height={200}
-                objectFit="cover"
               />
               <DrawerHeader>
-                <DrawerHeader className="text-center p-4">
-                  <DrawerTitle className="text-2xl font-bold text-gray-900">
+                <DrawerHeader className="text-white text-center p-4">
+                  <DrawerTitle className="text-2xl font-bold text-white">
                     {item.name}
                   </DrawerTitle>
-                  <DrawerDescription className="text-gray-600 mt-1">
+                  <DrawerDescription className="text-gray-300 mt-1">
                     {item.type}
                   </DrawerDescription>
                 </DrawerHeader>
               </DrawerHeader>
-              <p className="text-gray-800 text-base leading-relaxed mb-6">
+              <p className="text-gray-400 text-base leading-relaxed mb-6">
                 {item.description}
               </p>
               {validAdditionalImages.length > 0 && (
@@ -71,9 +66,8 @@ const Cards = ({ item }: Props) => {
                         <Image
                           src={imgSrc}
                           alt={`${item.name} - additional image ${index + 1}`}
-                          fill
-                          style={{ objectFit: "cover" }}
-                          className="rounded-md"
+                          height={100}
+                          width={100}
                         />
                       </div>
                     ))}
@@ -83,9 +77,17 @@ const Cards = ({ item }: Props) => {
             </div>
 
             <DrawerFooter className="flex flex-row justify-center items-center">
-              <Button variant="destructive" className="cursor-pointer">Enquire</Button>
+              <a
+                href={`mailto:support@example.com?subject=Product Enquiry: ${item.name}&body=Hi, I'm interested in "${item.name}". Please send me more details.`}
+              >
+                <Button variant="destructive" className="cursor-pointer">
+                  Enquire
+                </Button>
+              </a>
               <DrawerClose asChild>
-                <Button variant="outline" className="cursor-pointer">Cancel</Button>
+                <Button variant="outline" className="cursor-pointer text-white">
+                  Cancel
+                </Button>
               </DrawerClose>
             </DrawerFooter>
           </DrawerContent>

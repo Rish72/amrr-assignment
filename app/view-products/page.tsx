@@ -1,5 +1,4 @@
 "use client";
-
 import { useEffect, useState } from "react";
 import Cards from "@/components/Cards";
 import axios from "axios";
