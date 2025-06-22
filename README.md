@@ -1,15 +1,16 @@
 # 🛍️ E-commerce Product Showcase (Next.js & Cloudinary)
 
 ## 📚 Table of Contents
-1. [About the Project](#1-about-the-project)  
-2. [Features](#2-features)  
-3. [Tech Stack](#3-tech-stack)  
-4. [Getting Started](#4-getting-started)  
-5. [Project Structure](#5-project-structure)  
-6. [Usage](#6-usage)  
-7. [Contributing](#7-contributing)  
-8. [License](#8-license)  
-9. [Contact](#9-contact)  
+
+1. [About the Project](#1-about-the-project)
+2. [Features](#2-features)
+3. [Tech Stack](#3-tech-stack)
+4. [Getting Started](#4-getting-started)
+5. [Project Structure](#5-project-structure)
+6. [Usage](#6-usage)
+7. [Contributing](#7-contributing)
+8. [License](#8-license)
+9. [Contact](#9-contact)
 
 ---
 
@@ -21,31 +22,31 @@ This project is a modern, responsive e-commerce product showcase application bui
 
 ## 2. Features
 
-- **Product Listing**: Browse a comprehensive list of products with key details.  
-- **Interactive Product Details**: Open a drawer displaying product descriptions and additional images.  
-- **Image Optimization**: Fast, responsive images via **Cloudinary**, with potential **ImageKit** support.  
+- **Product Listing**: Browse a comprehensive list of products with key details.
+- **Interactive Product Details**: Open a drawer displaying product descriptions and additional images.
+- **Image Optimization**: Fast, responsive images via **Cloudinary**, with potential **ImageKit** support.
 - **Product Addition (Admin)**:
   - Form for name, type, description.
   - Cloudinary upload widget for cover and additional images.
   - Automatic integration of uploaded image URLs into product data.
-- **Responsive Design**: Mobile, tablet, and desktop ready.  
-- **Client-Side Data Fetching**: Uses `axios` and React Hooks.  
-- **Component-Based Architecture**: Reusable React components.  
+- **Responsive Design**: Mobile, tablet, and desktop ready.
+- **Client-Side Data Fetching**: Uses `axios` and React Hooks.
+- **Component-Based Architecture**: Reusable React components.
 - **UI Library**: Styled with **Shadcn UI** and **Tailwind CSS**.
 
 ---
 
 ## 3. Tech Stack
 
-- **Framework**: Next.js (React Framework)  
-- **Language**: TypeScript  
-- **Styling**: Tailwind CSS  
-- **UI Components**: Shadcn UI (built on Radix UI)  
+- **Framework**: Next.js (React Framework)
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **UI Components**: Shadcn UI (built on Radix UI)
 - **Image Management**:
   - Cloudinary (`@cloudinary/next`)
   - (Optional) ImageKit (`@imagekit/next`)
-- **HTTP Client**: Axios  
-- **Loading Spinner**: React Spinners  
+- **HTTP Client**: Axios
+- **Loading Spinner**: React Spinners
 - **Data Storage**: Local JSON (`items.json`) as mock DB (easily extendable)
 
 ---
@@ -73,7 +74,9 @@ Create a .env.local file in the root:
 ```bash
 touch .env.local
 ```
+
 Add:
+
 ```bash
 env
 # Cloudinary Credentials
@@ -87,6 +90,7 @@ NEXT_PUBLIC_MAGEKIT_URL=https://ik.imagekit.io/your_imagekit_id/
 ```
 
 Configure next.config.js
+
 ```bash
 js
 // next.config.js
@@ -112,6 +116,7 @@ module.exports = nextConfig;
 ```
 
 Start the Dev Server
+
 ```bash
 npm run dev
 # or
@@ -120,6 +125,7 @@ Visit: http://localhost:3000
 ```
 
 # 5. Project Structure
+
 ```bash
 .
 ├── public/
@@ -147,7 +153,9 @@ Visit: http://localhost:3000
 ├── tsconfig.json
 └── README.md
 ```
+
 # 6. Usage
+
 View Products: Go to /view-products
 
 Add Product: Go to /add-product
@@ -159,12 +167,22 @@ Upload up to 4 additional images
 Data Storage: Product info saved in data/items.json
 
 # 7. Contributing
-Contributions are welcome!
-Open an issue or PR for any bugs, features, or suggestions.
+
+```
+  Contributions are welcome!
+  Open an issue or PR for any bugs, features, or suggestions.
+```
 
 # 8. License
-# Distributed under the MIT License. See LICENSE for details.
+
+```
+  Distributed under the MIT License. See LICENSE for details.
+```
 
 # 9. Contact
-Rishabh Goel
-GitHub: https://github.com/rish72/assignment
+
+````
+  Rishabh Goel
+  GitHub: https://github.com/rish72/assignment
+  ```
+````

@@ -66,7 +66,7 @@ const Cards = ({ item }: Props) => {
                         <Image
                           src={imgSrc}
                           alt={`${item.name} - additional image ${index + 1}`}
-                          height={100}
+                          height={250}
                           width={100}
                         />
                       </div>

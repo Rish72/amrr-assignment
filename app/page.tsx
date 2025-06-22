@@ -12,7 +12,7 @@ export default function Home() {
           <Button className="cursor-pointer">View Products</Button>
         </Link>
 
-        <Link href="/add">
+        <Link href="/add-items">
           <Button className="cursor-pointer">Add Product</Button>
         </Link>
       </div>
