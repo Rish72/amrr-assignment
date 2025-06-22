@@ -39,6 +39,7 @@ const Products = () => {
       <div className="h-screen p-4 flex justify-center items-center">
         {" "}
         <ClipLoader
+          color="white"
           loading={loading}
           size={150}
           aria-label="Loading Spinner"

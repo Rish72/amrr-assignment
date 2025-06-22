@@ -115,7 +115,7 @@ const AddProduct = () => {
                 >
                   {({ open }) => {
                     return (
-                      <button
+                      <button type="button"
                         className="border border-gray-200 rounded-md"
                         onClick={() => open()}
                       >
@@ -148,8 +148,6 @@ const AddProduct = () => {
                       (info as CloudinaryUploadWidgetInfo).secure_url ||
                       (info as CloudinaryUploadWidgetInfo).url;
 
-                    if (!uploadedImageUrl) return;
-
                     setAdditionalImages((prevImages) => {
                       // Avoid duplicates
                       if (prevImages.includes(uploadedImageUrl))
@@ -169,6 +167,7 @@ const AddProduct = () => {
                   {({ open }) => {
                     return (
                       <button
+                      type="button"
                         className="border border-gray-200 rounded-md"
                         onClick={() => open()}
                       >

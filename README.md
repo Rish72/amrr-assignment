@@ -156,21 +156,21 @@ Visit: http://localhost:3000
 
 # 6. Usage
 
-View Products: Go to /view-products
+- View Products: Go to /view-products
 
-Add Product: Go to /add-product
+- Add Product: Go to /add-product
 
-Upload cover image using Cloudinary widget
+- Upload cover image using Cloudinary widget
 
-Upload up to 4 additional images
+- Upload up to 4 additional images
 
-Data Storage: Product info saved in data/items.json
+- Data Storage: Product info saved in data/items.json
 
 # 7. Contributing
 
 ```
-  Contributions are welcome!
-  Open an issue or PR for any bugs, features, or suggestions.
+   - Contributions are welcome!
+  - Open an issue or PR for any bugs, features, or suggestions.
 ```
 
 # 8. License

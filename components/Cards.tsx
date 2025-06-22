@@ -13,13 +13,31 @@ import {
 } from "./ui/drawer";
 import { Button } from "./ui/button";
 import Image from "next/image";
+import { Delete, Mail } from "lucide-react";
+import axios from "axios";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 type Props = {
   item: Item;
 };
 
 const Cards = ({ item }: Props) => {
+
+  const router = useRouter()
+
   const validAdditionalImages = item.additionalImages?.filter(Boolean) || [];
+  const handleDelete = async () => {
+    try {
+    await axios.delete(`/api/delete-item/${item._id}`);
+    toast.success("Item deleted successfully!");
+    router.refresh(); 
+  } catch (error) {
+    console.error("Failed to delete item:", error);
+    toast.error("Failed to delete item");
+  }
+  };
+
   return (
     <Card className="w-full text-white bg-black sm:w-[calc(50%-theme(gap.6)/2)] lg:w-[calc(33.33%-theme(gap.6)*2/3)] xl:w-[calc(25%-theme(gap.6)*3/4)]">
       <CardHeader>
@@ -32,7 +50,7 @@ const Cards = ({ item }: Props) => {
             Description
           </DrawerTrigger>
           <DrawerContent>
-            <div className="flex-grow p-4 overflow-y-auto items-center">
+            <div className="flex-grow p-4 overflow-y-auto justify-center items-center">
               <Image
                 src={item.coverImage}
                 alt={item.name}
@@ -54,7 +72,7 @@ const Cards = ({ item }: Props) => {
               </p>
               {validAdditionalImages.length > 0 && (
                 <div className="mt-6">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                  <h3 className="text-lg font-semibold text-gray-400 mb-3">
                     Additional Images
                   </h3>
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
@@ -67,7 +85,7 @@ const Cards = ({ item }: Props) => {
                           src={imgSrc}
                           alt={`${item.name} - additional image ${index + 1}`}
                           height={250}
-                          width={100}
+                          width={450}
                         />
                       </div>
                     ))}
@@ -80,7 +98,8 @@ const Cards = ({ item }: Props) => {
               <a
                 href={`mailto:support@example.com?subject=Product Enquiry: ${item.name}&body=Hi, I'm interested in "${item.name}". Please send me more details.`}
               >
-                <Button variant="destructive" className="cursor-pointer">
+                <Button className="cursor-pointer bg-white text-black">
+                  <Mail />
                   Enquire
                 </Button>
               </a>
@@ -89,6 +108,14 @@ const Cards = ({ item }: Props) => {
                   Cancel
                 </Button>
               </DrawerClose>
+              <Button
+                className="cursor-pointer"
+                variant="destructive"
+                onClick={handleDelete }
+              >
+                <Delete />
+                Delete
+              </Button>
             </DrawerFooter>
           </DrawerContent>
         </Drawer>
