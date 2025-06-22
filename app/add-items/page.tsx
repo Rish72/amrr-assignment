@@ -12,7 +12,6 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import Link from "next/link";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
@@ -114,11 +113,6 @@ const AddProduct = () => {
               <Button type="submit" className="w-full">
                 Add
               </Button>
-              <Link href="/view-products">
-                <Button variant="outline" className="w-full">
-                  View Products
-                </Button>
-              </Link>
             </CardFooter>
           </form>
         </CardContent>
